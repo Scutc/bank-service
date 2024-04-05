@@ -13,7 +13,6 @@ CREATE TABLE bank_service.account (
                          balance DECIMAL(15,2) NOT NULL CHECK (balance > 0) ,
                          initial_balance DECIMAL(15,2) NOT NULL CHECK (initial_balance > 0),
                          max_balance BOOLEAN NOT NULL DEFAULT false,
-                         last_update TIMESTAMP NOT NULL,
                          FOREIGN KEY (user_id) REFERENCES bank_service.user(id)
 );
 
