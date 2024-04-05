@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS bank_service;
+
 CREATE TABLE bank_service.user (
                       id BIGINT PRIMARY KEY,
                       name VARCHAR(500) NOT NULL ,
@@ -8,8 +10,8 @@ CREATE TABLE bank_service.user (
 CREATE TABLE bank_service.account (
                          id BIGINT PRIMARY KEY,
                          user_id BIGINT UNIQUE NOT NULL ,
-                         balance DECIMAL(15,2) NOT NULL ,
-                         initial_balance DECIMAL(15,2),
+                         balance DECIMAL(15,2) NOT NULL CHECK (balance > 0) ,
+                         initial_balance DECIMAL(15,2) NOT NULL CHECK (initial_balance > 0),
                          max_balance BOOLEAN NOT NULL DEFAULT false,
                          last_update TIMESTAMP NOT NULL,
                          FOREIGN KEY (user_id) REFERENCES bank_service.user(id)
