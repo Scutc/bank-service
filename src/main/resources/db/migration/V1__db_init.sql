@@ -21,6 +21,7 @@ CREATE TABLE bank_service.email_data (
                             id BIGINT PRIMARY KEY,
                             user_id BIGINT NOT NULL ,
                             email VARCHAR(200) UNIQUE NOT NULL,
+                            is_login_email BOOLEAN NOT NULL DEFAULT false,
                             FOREIGN KEY (user_id) REFERENCES bank_service.user(id)
 );
 

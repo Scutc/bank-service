@@ -3,17 +3,17 @@ package com.mesh.bankservice.exception;
 import lombok.Getter;
 
 @Getter
-public class CommonException extends RuntimeException {
-    private final CommonError error;
+public class BankServiceException extends RuntimeException {
+    private final Error error;
     private final String[] params;
 
-    public CommonException(CommonError error, String... params) {
+    public BankServiceException(Error error, String... params) {
         super(error.getCode());
         this.error = error;
         this.params = params;
     }
 
-    public CommonException(CommonError error, Throwable cause, String... params) {
+    public BankServiceException(Error error, Throwable cause, String... params) {
         super(error.getCode(), cause);
         this.error = error;
         this.params = params;

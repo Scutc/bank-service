@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum BankServiceError implements CommonError {
+public enum BankServiceError implements Error {
     USER_NOT_FOUND("ERROR-100", HttpStatus.NOT_FOUND, "User not found");
 
     private final String code;
