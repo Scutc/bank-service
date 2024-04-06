@@ -12,8 +12,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -37,8 +37,7 @@ public class User implements UserDetails {
     private String name;
 
     @Column(name = "date_of_birth", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(nullable = false, length = 500)
     private String password;
