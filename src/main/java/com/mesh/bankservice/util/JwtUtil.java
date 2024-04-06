@@ -24,19 +24,20 @@ public class JwtUtil {
     @Value("${security.jwt.token.secret}")
     private String secretKey;
 
-    public String extractUserId(String token){
-        return extractClaim(token, Claims::getSubject);
+    public String extractUserId(String authHeader) {
+        String jwt = authHeader.split(" ")[1].trim();
+        return extractClaim(jwt, Claims::getSubject);
     }
 
-    public <T> T extractClaim(String token, @NotNull Function<Claims, T> claimsResolver){
+    public <T> T extractClaim(String token, @NotNull Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(User user){
+    public String generateToken(User user) {
         return generateToken(new HashMap<>(), user);
     }
-    public String generateToken(Map<String, Object> extractClaims, User user){
+    public String generateToken(Map<String, Object> extractClaims, User user) {
         return Jwts
                 .builder()
                 .setClaims(extractClaims)
@@ -47,7 +48,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public boolean isTokenValid(String token){
+    public boolean isTokenValid(String token) {
         return !isTokenExpired(token);
     }
 
@@ -59,7 +60,7 @@ public class JwtUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String token){
+    private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
