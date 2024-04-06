@@ -9,6 +9,6 @@ import org.springframework.data.domain.Page;
 public interface UserService {
     Optional<User> findByEmail(String email);
 
-    Page<User> findUsersByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth,
-                                 Integer pageSize, Integer pageNumber);
+    Page<User> findByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth,
+                            Integer pageSize, Integer pageNumber);
 }

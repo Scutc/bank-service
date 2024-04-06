@@ -24,9 +24,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "user", schema = "bank_service")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class User implements UserDetails {
 
     @Id
@@ -85,5 +85,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String toString() {
+        return "User(id=" + this.getId()  + ")";
     }
 }
