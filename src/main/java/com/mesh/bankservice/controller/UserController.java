@@ -3,6 +3,7 @@ package com.mesh.bankservice.controller;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
+import com.mesh.bankservice.controller.mapper.UserDtoMapper;
 import com.mesh.bankservice.model.User;
 import com.mesh.bankservice.model.dto.UserDto;
 import com.mesh.bankservice.model.dto.UsersDto;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final UserDtoMapper userDtoMapper;
 
     @GetMapping()
     public ResponseEntity<UsersDto> getUsers(@RequestParam(value = "phone", required = false) String phoneNumber,
@@ -29,9 +31,10 @@ public class UserController {
                                              @RequestParam(value = "dateOfBirth", required = false) LocalDate dateOfBirth,
                                              @RequestParam("pageSize") @Min(1) Integer pageSize,
                                              @RequestParam("pageNumber") @Min(0) Integer pageNumber) {
-        Page<User> usersPage= userService.findByParams(phoneNumber, email, name, dateOfBirth, pageSize, pageNumber);
-        UserDto userDto = new UserDto();
-        return new ResponseEntity<>(HttpStatus.OK);
+        Page<User> usersPage = userService.findByParams(phoneNumber, email, name, dateOfBirth, pageSize, pageNumber);
+        UsersDto usersDto =
+            userDtoMapper.fromPageUser(usersPage.getContent(), usersPage.getTotalPages(), usersPage.getSize(), usersPage.getNumber());
+        return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
 
 }
