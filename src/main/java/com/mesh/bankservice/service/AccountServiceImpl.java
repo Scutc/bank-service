@@ -60,7 +60,6 @@ public class AccountServiceImpl implements AccountService {
             throw new BankServiceException(BALANCE_IS_NOT_ENOUGH);
         }
         accountFrom.setMaxBalance(false);
-
         accountFrom.setBalance(newBalanceFrom);
 
         BigDecimal maxAllowedBalanceTo = accountTo.getInitialBalance().multiply(new BigDecimal(MAX_BALANCE_RATE));
@@ -68,9 +67,7 @@ public class AccountServiceImpl implements AccountService {
         if (newBalanceTo.compareTo(maxAllowedBalanceTo) > 0) {
             throw new BankServiceException(BALANCE_IS_TOO_BIG);
         }
-        if (newBalanceTo.compareTo(maxAllowedBalanceTo) == 0) {
-            accountTo.setMaxBalance(true);
-        }
+        accountTo.setMaxBalance(newBalanceTo.compareTo(maxAllowedBalanceTo) == 0);
         accountTo.setBalance(newBalanceTo);
 
         accountRepository.save(accountFrom);

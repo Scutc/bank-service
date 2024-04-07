@@ -2,7 +2,6 @@ package com.mesh.bankservice.controller;
 
 import com.mesh.bankservice.model.dto.TransferDto;
 import com.mesh.bankservice.service.AccountService;
-import com.mesh.bankservice.service.TransferService;
 import com.mesh.bankservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
