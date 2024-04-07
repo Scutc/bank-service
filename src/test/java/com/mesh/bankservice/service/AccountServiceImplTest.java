@@ -28,7 +28,7 @@ public class AccountServiceImplTest {
     private AccountServiceImpl accountService;
 
     @Test
-    public void testSuccessTransferMoney() {
+    public void successTransferMoney() {
         Long fromUserId = 1L;
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("100");
@@ -61,7 +61,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testTransferMoneyWithNegativeAmount() {
+    public void transferMoneyWithNegativeAmount() {
         Long fromUserId = 1L;
         Long toUserId = 2L;
         BigDecimal amount = new BigDecimal("-100");
@@ -72,7 +72,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testTransferMoneyWithNotEnoughBalance() {
+    public void transferMoneyWithNotEnoughBalance() {
         Long fromUserId = 1L;
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("1000");
@@ -88,7 +88,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testTransferMoneyExceedsMaxAllowedBalance() {
+    public void transferMoneyExceedsMaxAllowedBalance() {
         Long fromUserId = 1L;
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("100");

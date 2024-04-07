@@ -11,13 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "user", schema = "bank_service")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class User implements UserDetails {
 
