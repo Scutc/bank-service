@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,9 +53,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String toString() {
-        return "User(id=" + this.getId()  + ")";
     }
 }

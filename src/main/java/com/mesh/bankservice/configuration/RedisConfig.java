@@ -2,6 +2,8 @@ package com.mesh.bankservice.configuration;
 
 import java.time.Duration;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,13 +44,13 @@ public class RedisConfig {
     @Primary
     public RedisCacheManager redisCacheManager(LettuceConnectionFactory lettuceConnectionFactory) {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule()); // Регистрируем JavaTimeModule
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper = objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 
-        // Создаем сериализатор с нашим ObjectMapper
-        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().disableCachingNullValues()
             .entryTtl(Duration.ofMinutes(1))
-            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
+            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)));
 
         redisCacheConfiguration.usePrefix();
 

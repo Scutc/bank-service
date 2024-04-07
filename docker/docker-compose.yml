@@ -10,6 +10,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: bank_db
+
   redis:
     image: redis:latest
     restart: always

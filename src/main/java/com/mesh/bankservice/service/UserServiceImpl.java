@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@EnableCaching
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailDataRepository emailDataRepository;
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "users", key = "{#phoneNumber, #email, #name, #dateOfBirth, #pageSize, #pageNumber}")
     public UsersPage findByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth, Integer pageSize,
                                   Integer pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
