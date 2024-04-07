@@ -1,17 +1,15 @@
 package com.mesh.bankservice.repository;
 
-import com.mesh.bankservice.model.User;
-import com.mesh.bankservice.repository.enity.UserEntity;
-import org.springframework.data.jpa.domain.Specification;
-
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+
+import com.mesh.bankservice.repository.enity.UserEntity;
+import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecification {
-
     public static Specification<UserEntity> build(String phone, String email, String name, LocalDate dateOfBirth) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();

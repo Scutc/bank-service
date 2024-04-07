@@ -2,9 +2,6 @@ package com.mesh.bankservice.service;
 
 import java.util.Optional;
 
-import static com.mesh.bankservice.exception.BankServiceError.EMAIL_ALREADY_EXISTS;
-import static com.mesh.bankservice.exception.BankServiceError.EMAIL_NOT_BELONGS_USER;
-
 import com.mesh.bankservice.exception.BankServiceException;
 import com.mesh.bankservice.repository.EmailDataRepository;
 import com.mesh.bankservice.repository.UserRepository;
@@ -12,6 +9,9 @@ import com.mesh.bankservice.repository.enity.EmailDataEntity;
 import com.mesh.bankservice.repository.enity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static com.mesh.bankservice.exception.BankServiceError.EMAIL_ALREADY_EXISTS;
+import static com.mesh.bankservice.exception.BankServiceError.EMAIL_NOT_BELONGS_USER;
 
 @Service
 @RequiredArgsConstructor

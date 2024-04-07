@@ -1,8 +1,8 @@
 package com.mesh.bankservice.controller;
 
+import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import java.time.LocalDate;
 
 import com.mesh.bankservice.mapper.UserDtoMapper;
 import com.mesh.bankservice.model.UsersPage;
@@ -52,7 +52,6 @@ public class UserController {
         UsersDto usersDto = userDtoMapper.fromUsersPage(usersPage);
         return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
-
 
     @PostMapping("/email")
     ResponseEntity<Void> addEmail(@RequestHeader(value = "Authorization") String authHeader,

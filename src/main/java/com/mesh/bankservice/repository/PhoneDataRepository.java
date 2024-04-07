@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface PhoneDataRepository extends JpaRepository<PhoneDataEntity, Long> {
     Optional<PhoneDataEntity> findByPhone(String phone);
 
-    Optional<PhoneDataEntity> findByPhoneAndUserId(String phone, Long user_id);
+    Optional<PhoneDataEntity> findByPhoneAndUserId(String phone, Long userId);
 }

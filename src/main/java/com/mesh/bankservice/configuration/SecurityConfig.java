@@ -35,14 +35,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorize)->authorize
+                .authorizeHttpRequests((authorize) -> authorize
                     .antMatchers(AUTH_WHITELIST)
                     .permitAll()
                     .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
                         .anyRequest()
                         .permitAll()
                 )
-                .sessionManagement((session)->session
+                .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider)

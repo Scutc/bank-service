@@ -1,7 +1,5 @@
 package com.mesh.bankservice.service;
 
-import java.util.Optional;
-
 import com.mesh.bankservice.model.AuthenticateRequest;
 import com.mesh.bankservice.model.AuthenticationResponse;
 import com.mesh.bankservice.model.User;

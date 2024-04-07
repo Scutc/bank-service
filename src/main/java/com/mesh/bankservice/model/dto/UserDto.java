@@ -10,7 +10,7 @@ import lombok.Data;
 public class UserDto {
     private Long id;
     private String name;
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
     private List<String> emails;
     private List<String> phones;

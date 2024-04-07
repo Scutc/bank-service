@@ -3,11 +3,6 @@ package com.mesh.bankservice.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.mesh.bankservice.exception.BankServiceError.BALANCE_IS_NOT_ENOUGH;
-import static com.mesh.bankservice.exception.BankServiceError.BALANCE_IS_TOO_BIG;
-import static com.mesh.bankservice.exception.BankServiceError.TRANSFER_VALUE_SHOULD_BE_POSITIVE;
-import static java.math.BigDecimal.ZERO;
-
 import com.mesh.bankservice.exception.BankServiceException;
 import com.mesh.bankservice.repository.AccountRepository;
 import com.mesh.bankservice.repository.enity.AccountEntity;
@@ -17,6 +12,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.mesh.bankservice.exception.BankServiceError.BALANCE_IS_NOT_ENOUGH;
+import static com.mesh.bankservice.exception.BankServiceError.BALANCE_IS_TOO_BIG;
+import static com.mesh.bankservice.exception.BankServiceError.TRANSFER_VALUE_SHOULD_BE_POSITIVE;
+import static java.math.BigDecimal.ZERO;
 
 @Service
 @EnableScheduling

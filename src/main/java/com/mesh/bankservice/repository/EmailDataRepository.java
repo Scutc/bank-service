@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface EmailDataRepository extends JpaRepository<EmailDataEntity, Long> {
     Optional<EmailDataEntity> findByEmail(String email);
 
-    Optional<EmailDataEntity> findByEmailAndUserId(String email, Long user_id);
+    Optional<EmailDataEntity> findByEmailAndUserId(String email, Long userId);
 }

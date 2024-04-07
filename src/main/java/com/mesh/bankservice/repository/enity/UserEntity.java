@@ -1,5 +1,7 @@
 package com.mesh.bankservice.repository.enity;
 
+import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +13,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "user", schema = "bank_service")

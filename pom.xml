@@ -15,6 +15,9 @@
 	<description>Bank service home assignment</description>
 	<properties>
 		<java.version>11</java.version>
+		<checkstyle.version>10.15.0</checkstyle.version>
+		<checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
+		<sevntu.checkstyle.plugin.version>1.44.1</sevntu.checkstyle.plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -152,7 +155,49 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${checkstyle.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.github.sevntu-checkstyle</groupId>
+						<artifactId>sevntu-checks</artifactId>
+						<version>${sevntu.checkstyle.plugin.version}</version>
+					</dependency>
+				</dependencies>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                    <consoleOutput>true</consoleOutput>
+                    <failOnViolation>true</failOnViolation>
+                    <failsOnError>false</failsOnError>
+                </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.12.1</version>
+			</plugin>
 		</plugins>
 	</build>
 
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin.version}</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+					<failOnViolation>false</failOnViolation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

@@ -1,12 +1,12 @@
 package com.mesh.bankservice.util;
 
-import javax.validation.constraints.NotNull;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import javax.validation.constraints.NotNull;
 
 import com.mesh.bankservice.model.User;
 import io.jsonwebtoken.Claims;
@@ -15,7 +15,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class JwtUtil {
@@ -36,6 +35,7 @@ public class JwtUtil {
     public String generateToken(User user) {
         return generateToken(new HashMap<>(), user);
     }
+
     public String generateToken(Map<String, Object> extractClaims, User user) {
         return Jwts
                 .builder()
