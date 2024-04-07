@@ -1,4 +1,4 @@
-package com.mesh.bankservice.controller.mapper;
+package com.mesh.bankservice.mapper;
 
 import com.mesh.bankservice.model.UsersPage;
 import com.mesh.bankservice.model.dto.UsersDto;

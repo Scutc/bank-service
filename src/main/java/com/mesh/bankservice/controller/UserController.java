@@ -4,8 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
-import com.mesh.bankservice.controller.mapper.UserDtoMapper;
-import com.mesh.bankservice.model.User;
+import com.mesh.bankservice.mapper.UserDtoMapper;
 import com.mesh.bankservice.model.UsersPage;
 import com.mesh.bankservice.model.dto.EmailDataDto;
 import com.mesh.bankservice.model.dto.PhoneDataDto;
@@ -17,7 +16,6 @@ import com.mesh.bankservice.service.PhoneDataService;
 import com.mesh.bankservice.service.UserService;
 import com.mesh.bankservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
