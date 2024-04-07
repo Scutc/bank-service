@@ -73,19 +73,20 @@ public class UserEntityControllerTest {
 
         EmailDataEntity email1User1 = EmailDataEntity.builder()
             .email("testuser1@example.com")
-            .userEntity(user1)
+            .user(user1)
+            .isLoginEmail(true)
             .build();
 
         PhoneDataEntity phone1User1 = PhoneDataEntity.builder()
             .phone("+12345678901")
-            .userEntity(user1)
+            .user(user1)
             .build();
 
         AccountEntity accountUser1 = AccountEntity.builder()
             .balance(new BigDecimal("10000.00"))
             .initialBalance(new BigDecimal("10000.00"))
             .maxBalance(false)
-            .userEntity(user1)
+            .user(user1)
             .build();
 
         user1.setEmails(List.of(email1User1));
@@ -100,19 +101,20 @@ public class UserEntityControllerTest {
 
         EmailDataEntity email1User2 = EmailDataEntity.builder()
             .email("testuser2@example.com")
-            .userEntity(user2)
+            .user(user2)
+            .isLoginEmail(true)
             .build();
 
         PhoneDataEntity phone1User2 = PhoneDataEntity.builder()
             .phone("+19876543210")
-            .userEntity(user2)
+            .user(user2)
             .build();
 
         AccountEntity accountUser2 = AccountEntity.builder()
             .balance(new BigDecimal("15000.00"))
             .initialBalance(new BigDecimal("15000.00"))
             .maxBalance(false)
-            .userEntity(user2)
+            .user(user2)
             .build();
 
         user2.setEmails(List.of(email1User2));
