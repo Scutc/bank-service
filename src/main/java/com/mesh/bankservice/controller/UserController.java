@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +58,7 @@ public class UserController {
 
     @PostMapping("/email")
     ResponseEntity<Void> addEmail(@RequestHeader(value = "Authorization") String authHeader,
-                                  @RequestBody @Valid EmailDataDto emailDataDto) {
+                                  @Valid @RequestBody EmailDataDto emailDataDto) {
         String userId = jwtUtil.extractUserId(authHeader);
         emailDataService.add(emailDataDto.getEmail(), Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,7 +67,7 @@ public class UserController {
     @PutMapping("/email/{currentEmail}")
     ResponseEntity<Void> updateEmail(@RequestHeader(value = "Authorization") String authHeader,
                                      @PathVariable("currentEmail") String currentEmail,
-                                     @RequestBody @Valid UpdateEmailDto updateEmailDto) {
+                                     @Valid @RequestBody UpdateEmailDto updateEmailDto) {
         String userId = jwtUtil.extractUserId(authHeader);
         emailDataService.update(currentEmail, updateEmailDto.getNewEmail(), Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,7 +83,7 @@ public class UserController {
 
     @PostMapping("/phone")
     ResponseEntity<Void> addPhone(@RequestHeader(value = "Authorization") String authHeader,
-                                  @RequestBody @Valid PhoneDataDto phoneDataDto) {
+                                  @Valid @RequestBody PhoneDataDto phoneDataDto) {
         String userId = jwtUtil.extractUserId(authHeader);
         phoneDataService.add(phoneDataDto.getPhone(), Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -91,7 +92,7 @@ public class UserController {
     @PutMapping("/phone/{currentPhone}")
     ResponseEntity<Void> updatePhone(@RequestHeader(value = "Authorization") String authHeader,
                                      @PathVariable("currentPhone") String currentPhone,
-                                     @RequestBody @Valid UpdatePhoneDto updatePhoneDto) {
+                                     @Valid @RequestBody UpdatePhoneDto updatePhoneDto) {
         String userId = jwtUtil.extractUserId(authHeader);
         phoneDataService.update(currentPhone, updatePhoneDto.getNewPhone(), Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

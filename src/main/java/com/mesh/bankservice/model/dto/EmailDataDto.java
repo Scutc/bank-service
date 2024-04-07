@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class EmailDataDto {
+    @NotBlank(message = "Email is mandatory")
     @Email
-    @NotBlank
     private String email;
 }
