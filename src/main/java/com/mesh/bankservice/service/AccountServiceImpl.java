@@ -9,8 +9,8 @@ import static com.mesh.bankservice.exception.BankServiceError.TRANSFER_VALUE_SHO
 import static java.math.BigDecimal.ZERO;
 
 import com.mesh.bankservice.exception.BankServiceException;
-import com.mesh.bankservice.model.Account;
 import com.mesh.bankservice.repository.AccountRepository;
+import com.mesh.bankservice.repository.enity.AccountEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,18 +31,18 @@ public class AccountServiceImpl implements AccountService {
     @Scheduled(initialDelayString = "${accountProcessing.initialDelay}", fixedDelayString = "${accountProcessing.fixedDelay}")
     @Transactional
     public void increaseBalances() {
-        List<Account> accounts = accountRepository.findByMaxBalanceFalseWithLock();
-        for (Account account : accounts) {
-            BigDecimal maxAllowedBalance = account.getInitialBalance().multiply(new BigDecimal(MAX_BALANCE_RATE));
+        List<AccountEntity> accountEntities = accountRepository.findByMaxBalanceFalseWithLock();
+        for (AccountEntity accountEntity : accountEntities) {
+            BigDecimal maxAllowedBalance = accountEntity.getInitialBalance().multiply(new BigDecimal(MAX_BALANCE_RATE));
             BigDecimal increaseRate = new BigDecimal(BALANCE_INCREASE_RATE);
-            BigDecimal increasedBalance = account.getBalance().multiply(increaseRate);
+            BigDecimal increasedBalance = accountEntity.getBalance().multiply(increaseRate);
             if (increasedBalance.compareTo(maxAllowedBalance) > 0) {
-                account.setBalance(maxAllowedBalance);
-                account.setMaxBalance(true);
+                accountEntity.setBalance(maxAllowedBalance);
+                accountEntity.setMaxBalance(true);
             } else {
-                account.setBalance(increasedBalance);
+                accountEntity.setBalance(increasedBalance);
             }
-            accountRepository.save(account);
+            accountRepository.save(accountEntity);
         }
     }
 
@@ -52,8 +52,8 @@ public class AccountServiceImpl implements AccountService {
         if (amount.compareTo(ZERO) <= 0) {
             throw new BankServiceException(TRANSFER_VALUE_SHOULD_BE_POSITIVE);
         }
-        Account accountFrom = accountRepository.findByUserId(userId);
-        Account accountTo = accountRepository.findByUserId(toUserId);
+        AccountEntity accountFrom = accountRepository.findByUserId(userId);
+        AccountEntity accountTo = accountRepository.findByUserId(toUserId);
 
         BigDecimal newBalanceFrom = accountFrom.getBalance().subtract(amount);
         if (newBalanceFrom.compareTo(ZERO) < 0) {

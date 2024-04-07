@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import com.mesh.bankservice.controller.mapper.UserDtoMapper;
 import com.mesh.bankservice.model.User;
+import com.mesh.bankservice.model.UsersPage;
 import com.mesh.bankservice.model.dto.EmailDataDto;
 import com.mesh.bankservice.model.dto.PhoneDataDto;
 import com.mesh.bankservice.model.dto.UpdateEmailDto;
@@ -49,9 +50,8 @@ public class UserController {
                                              @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dateOfBirth,
                                              @RequestParam("pageSize") @Min(1) Integer pageSize,
                                              @RequestParam("pageNumber") @Min(0) Integer pageNumber) {
-        Page<User> usersPage = userService.findByParams(phoneNumber, email, name, dateOfBirth, pageSize, pageNumber);
-        UsersDto usersDto =
-            userDtoMapper.fromUsersPage(usersPage.getNumber(), usersPage.getSize(), usersPage.getTotalPages(), usersPage.getContent());
+        UsersPage usersPage = userService.findByParams(phoneNumber, email, name, dateOfBirth, pageSize, pageNumber);
+        UsersDto usersDto = userDtoMapper.fromUsersPage(usersPage);
         return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
 

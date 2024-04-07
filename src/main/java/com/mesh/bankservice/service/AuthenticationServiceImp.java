@@ -5,7 +5,6 @@ import java.util.Optional;
 import com.mesh.bankservice.model.AuthenticateRequest;
 import com.mesh.bankservice.model.AuthenticationResponse;
 import com.mesh.bankservice.model.User;
-import com.mesh.bankservice.repository.UserRepository;
 import com.mesh.bankservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +26,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 request.getPassword()
             )
         );
-        User user = userService.findByEmail(request.getEmail()).orElseThrow();
+        User user = userService.findByEmail(request.getEmail());
 
         String jwtToken = jwtUtil.generateToken(user);
 

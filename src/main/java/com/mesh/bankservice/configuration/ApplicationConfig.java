@@ -1,5 +1,6 @@
 package com.mesh.bankservice.configuration;
 
+import com.mesh.bankservice.model.User;
 import com.mesh.bankservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,13 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userService.findByEmail(username)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return username -> {
+            User user = userService.findByEmail(username);
+            if (user == null) {
+                throw new UsernameNotFoundException("User not found");
+            }
+            return user;
+        };
     }
 
     @Bean

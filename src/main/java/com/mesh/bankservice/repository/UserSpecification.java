@@ -1,6 +1,7 @@
 package com.mesh.bankservice.repository;
 
 import com.mesh.bankservice.model.User;
+import com.mesh.bankservice.repository.enity.UserEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.JoinType;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class UserSpecification {
 
-    public static Specification<User> build(String phone, String email, String name, LocalDate dateOfBirth) {
+    public static Specification<UserEntity> build(String phone, String email, String name, LocalDate dateOfBirth) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

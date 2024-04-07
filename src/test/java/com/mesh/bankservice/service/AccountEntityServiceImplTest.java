@@ -11,8 +11,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.mesh.bankservice.exception.BankServiceException;
-import com.mesh.bankservice.model.Account;
 import com.mesh.bankservice.repository.AccountRepository;
+import com.mesh.bankservice.repository.enity.AccountEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,7 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountServiceImplTest {
+public class AccountEntityServiceImplTest {
     @Mock
     private AccountRepository accountRepository;
 
@@ -33,13 +33,13 @@ public class AccountServiceImplTest {
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("100");
 
-        Account fromAccount = Account.builder()
+        AccountEntity fromAccount = AccountEntity.builder()
             .balance(new BigDecimal(1000))
             .initialBalance(new BigDecimal(1000))
             .maxBalance(false)
             .build();
 
-        Account toAccount = Account.builder()
+        AccountEntity toAccount = AccountEntity.builder()
             .balance(new BigDecimal(1000))
             .initialBalance(new BigDecimal(1000))
             .maxBalance(false)
@@ -77,7 +77,7 @@ public class AccountServiceImplTest {
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("1000");
 
-        Account fromAccount = new Account();
+        AccountEntity fromAccount = new AccountEntity();
         fromAccount.setBalance(new BigDecimal("500")); // Недостаточно средств
 
         when(accountRepository.findByUserId(fromUserId)).thenReturn(fromAccount);
@@ -93,8 +93,8 @@ public class AccountServiceImplTest {
         Long toUserId = 2L;
         BigDecimal transferAmount = new BigDecimal("100");
 
-        Account fromAccount = new Account();
-        Account toAccount = new Account();
+        AccountEntity fromAccount = new AccountEntity();
+        AccountEntity toAccount = new AccountEntity();
         fromAccount.setBalance(new BigDecimal("1000"));
         toAccount.setBalance(new BigDecimal("2000")); // Текущий баланс получателя
         toAccount.setInitialBalance(new BigDecimal("1000")); // Начальный баланс получателя

@@ -12,6 +12,6 @@ public class UserDto {
     private String name;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate dateOfBirth;
-    private List<EmailDataDto> emails;
-    private List<PhoneDataDto> phones;
+    private List<String> emails;
+    private List<String> phones;
 }

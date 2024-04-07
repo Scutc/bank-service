@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import com.mesh.bankservice.model.User;
+import com.mesh.bankservice.model.UsersPage;
 import org.springframework.data.domain.Page;
 
 public interface UserService {
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 
-    Page<User> findByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth,
-                            Integer pageSize, Integer pageNumber);
+    UsersPage findByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth,
+                           Integer pageSize, Integer pageNumber);
 }

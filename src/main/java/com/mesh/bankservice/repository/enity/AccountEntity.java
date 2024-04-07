@@ -1,4 +1,4 @@
-package com.mesh.bankservice.model;
+package com.mesh.bankservice.repository.enity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name = "account", schema = "bank_service")
@@ -24,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Account {
+public class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_seq")
@@ -43,5 +42,5 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, nullable = false)
     @JsonBackReference
-    private User user;
+    private UserEntity user;
 }
