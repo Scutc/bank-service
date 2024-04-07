@@ -21,7 +21,7 @@ public class EmailDataServiceImpl implements EmailDataService {
     private final UserRepository userRepository;
 
     @Override
-    public void addEmail(String email, Long userId) {
+    public void add(String email, Long userId) {
         Optional<EmailData> optionalEmailData = emailDataRepository.findByEmail(email);
         if (optionalEmailData.isPresent()) {
             throw new BankServiceException(EMAIL_ALREADY_EXISTS, email);
@@ -35,7 +35,7 @@ public class EmailDataServiceImpl implements EmailDataService {
     }
 
     @Override
-    public void updateEmail(String currentEmail, String newEmail, Long userId) {
+    public void update(String currentEmail, String newEmail, Long userId) {
         Optional<EmailData> currentOptionalEmailData = emailDataRepository.findByEmailAndUserId(currentEmail, userId);
         if (currentOptionalEmailData.isEmpty()) {
             throw new BankServiceException(EMAIL_NOT_BELONGS_USER, currentEmail, String.valueOf(userId));
@@ -47,5 +47,18 @@ public class EmailDataServiceImpl implements EmailDataService {
         EmailData currentEmailData = currentOptionalEmailData.get();
         currentEmailData.setEmail(newEmail);
         emailDataRepository.save(currentEmailData);
+    }
+
+    @Override
+    public void delete(String email, Long userId) {
+        Optional<EmailData> currentOptionalEmailData = emailDataRepository.findByEmailAndUserId(email, userId);
+        if (currentOptionalEmailData.isEmpty()) {
+            throw new BankServiceException(EMAIL_NOT_BELONGS_USER, email, String.valueOf(userId));
+        }
+        Optional<EmailData> optionalEmailData = emailDataRepository.findByEmail(email);
+        if (optionalEmailData.isEmpty()) {
+            throw new BankServiceException(EMAIL_ALREADY_EXISTS, email);
+        }
+        emailDataRepository.delete(optionalEmailData.get());
     }
 }

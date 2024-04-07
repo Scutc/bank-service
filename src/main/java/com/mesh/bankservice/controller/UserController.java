@@ -7,9 +7,12 @@ import java.time.LocalDate;
 import com.mesh.bankservice.controller.mapper.UserDtoMapper;
 import com.mesh.bankservice.model.User;
 import com.mesh.bankservice.model.dto.EmailDataDto;
+import com.mesh.bankservice.model.dto.PhoneDataDto;
 import com.mesh.bankservice.model.dto.UpdateEmailDto;
+import com.mesh.bankservice.model.dto.UpdatePhoneDto;
 import com.mesh.bankservice.model.dto.UsersDto;
 import com.mesh.bankservice.service.EmailDataService;
+import com.mesh.bankservice.service.PhoneDataService;
 import com.mesh.bankservice.service.UserService;
 import com.mesh.bankservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
     private final EmailDataService emailDataService;
+    private final PhoneDataService phoneDataService;
     private final UserDtoMapper userDtoMapper;
     private final JwtUtil jwtUtil;
 
@@ -54,7 +59,7 @@ public class UserController {
     ResponseEntity<Void> addEmail(@RequestHeader(value = "Authorization") String authHeader,
                                   @RequestBody @Valid EmailDataDto emailDataDto) {
         String userId = jwtUtil.extractUserId(authHeader);
-        emailDataService.addEmail(emailDataDto.getEmail(), Long.valueOf(userId));
+        emailDataService.add(emailDataDto.getEmail(), Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -63,7 +68,40 @@ public class UserController {
                                      @PathVariable("currentEmail") String currentEmail,
                                      @RequestBody @Valid UpdateEmailDto updateEmailDto) {
         String userId = jwtUtil.extractUserId(authHeader);
-        emailDataService.updateEmail(currentEmail, updateEmailDto.getNewEmail(), Long.valueOf(userId));
+        emailDataService.update(currentEmail, updateEmailDto.getNewEmail(), Long.valueOf(userId));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/email/{email}")
+    ResponseEntity<Void> deleteEmail(@RequestHeader(value = "Authorization") String authHeader,
+                                     @PathVariable("email") String email) {
+        String userId = jwtUtil.extractUserId(authHeader);
+        emailDataService.delete(email, Long.valueOf(userId));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/phone")
+    ResponseEntity<Void> addPhone(@RequestHeader(value = "Authorization") String authHeader,
+                                  @RequestBody @Valid PhoneDataDto phoneDataDto) {
+        String userId = jwtUtil.extractUserId(authHeader);
+        phoneDataService.add(phoneDataDto.getPhone(), Long.valueOf(userId));
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/phone/{currentPhone}")
+    ResponseEntity<Void> updatePhone(@RequestHeader(value = "Authorization") String authHeader,
+                                     @PathVariable("currentPhone") String currentPhone,
+                                     @RequestBody @Valid UpdatePhoneDto updatePhoneDto) {
+        String userId = jwtUtil.extractUserId(authHeader);
+        phoneDataService.update(currentPhone, updatePhoneDto.getNewPhone(), Long.valueOf(userId));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/phone/{phone}")
+    ResponseEntity<Void> deletePhone(@RequestHeader(value = "Authorization") String authHeader,
+                                     @PathVariable("phone") String phone) {
+        String userId = jwtUtil.extractUserId(authHeader);
+        phoneDataService.delete(phone, Long.valueOf(userId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

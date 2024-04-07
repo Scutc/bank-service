@@ -33,7 +33,6 @@ public class AuthenticationServiceImp implements AuthenticationService {
 
         return AuthenticationResponse.builder()
             .token(jwtToken)
-
             .build();
     }
 }
