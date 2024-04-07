@@ -21,6 +21,6 @@ public class BankServiceException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return error.getCode() + " " + String.format(error.getDescription(), (Object[]) params);
+        return String.format(error.getDescription(), (Object[]) params);
     }
 }
