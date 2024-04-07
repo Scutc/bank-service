@@ -47,11 +47,9 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<EmailData> emails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<PhoneData> phones;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

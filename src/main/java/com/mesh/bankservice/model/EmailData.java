@@ -35,7 +35,6 @@ public class EmailData {
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private User user;
 
     @Column(name = "is_login_email", nullable = false)

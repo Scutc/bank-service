@@ -9,6 +9,8 @@ import com.mesh.bankservice.repository.EmailDataRepository;
 import com.mesh.bankservice.repository.UserRepository;
 import com.mesh.bankservice.repository.UserSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +18,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@EnableCaching
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailDataRepository emailDataRepository;
 
     @Override
+    @Cacheable(value = "users", key = "#email")
     public Optional<User> findByEmail(String email) {
         return emailDataRepository.findByEmail(email)
             .map(EmailData::getUser);
