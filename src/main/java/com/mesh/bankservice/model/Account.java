@@ -11,6 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,5 +42,6 @@ public class Account {
 
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, nullable = false)
+    @JsonBackReference
     private User user;
 }

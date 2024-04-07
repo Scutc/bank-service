@@ -7,7 +7,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
 
 security:
@@ -18,3 +18,7 @@ security:
 accountProcessing:
   initialDelay: 30000
   fixedDelay: 30000
+
+redis:
+  host: localhost
+  port: 6340

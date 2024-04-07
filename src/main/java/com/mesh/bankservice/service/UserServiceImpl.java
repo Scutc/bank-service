@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findByParams(String phoneNumber, String email, String name, LocalDate dateOfBirth, Integer pageSize,
-                                   Integer pageNumber) {
+                                  Integer pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return userRepository.findAll(UserSpecification.build(phoneNumber, email, name, dateOfBirth), pageable);
     }

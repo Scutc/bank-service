@@ -51,9 +51,10 @@ public class UserController {
                                              @RequestParam("pageNumber") @Min(0) Integer pageNumber) {
         Page<User> usersPage = userService.findByParams(phoneNumber, email, name, dateOfBirth, pageSize, pageNumber);
         UsersDto usersDto =
-            userDtoMapper.fromPageUser(usersPage.getContent(), usersPage.getTotalPages(), usersPage.getSize(), usersPage.getNumber());
+            userDtoMapper.fromUsersPage(usersPage.getNumber(), usersPage.getSize(), usersPage.getTotalPages(), usersPage.getContent());
         return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
+
 
     @PostMapping("/email")
     ResponseEntity<Void> addEmail(@RequestHeader(value = "Authorization") String authHeader,
